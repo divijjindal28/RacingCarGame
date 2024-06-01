@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmoothFollow : MonoBehaviour
+public class SmoothFollow2 : MonoBehaviour
 {
     public Transform target;
     public float distance = 8.0f;

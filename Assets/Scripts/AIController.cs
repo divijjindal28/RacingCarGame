@@ -21,6 +21,7 @@ public class AIController : MonoBehaviour
 
     float lastTimeMoving = 0;
     CheckPointManager cpManager;
+    float finishSteer;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +37,7 @@ public class AIController : MonoBehaviour
 
         ghostScript = gameObject.GetComponent<Ghost>();
         ghostScript.enabled = false;
+        finishSteer = Random.Range(-1.0f, 1.0f);
     }
 
 
@@ -69,7 +71,17 @@ public class AIController : MonoBehaviour
             lastTimeMoving = Time.time;
             return;
         }
-        
+
+        if (cpManager == null)
+        {
+            cpManager = ds.rb.GetComponent<CheckPointManager>();
+        }
+
+        if (cpManager.lap == RaceMonitor.totalLaps + 1) {
+            ds.highAccel.Stop();
+            ds.Go(0, finishSteer, 0);
+            return;
+        }
         ProgressTracker();
         Vector3 localTarget;
         float targetAngle;
@@ -77,11 +89,8 @@ public class AIController : MonoBehaviour
         if (ds.rb.velocity.magnitude > 1)
             lastTimeMoving = Time.time;
 
-        if (Time.time > (lastTimeMoving + 4)) {
-            if(cpManager == null)
-            {
-                cpManager = ds.rb.GetComponent<CheckPointManager>();
-            }
+        if (Time.time > (lastTimeMoving + 4) || ds.rb.gameObject.transform.position.y < -5) {
+            
             ds.rb.gameObject.transform.position = cpManager.LastCP.transform.position + Vector3.up * 2;
             ds.rb.gameObject.transform.rotation = cpManager.LastCP.transform.rotation;
             //ds.rb.gameObject.transform.position = circuit.waypoints[currentTrackerWP].transform.position + Vector3.up * 2;
@@ -120,10 +129,19 @@ public class AIController : MonoBehaviour
             accel = Mathf.Lerp(0, 1  * accelSentivity, 1- cornerFactor);
         }
 
+        float prevTorque = ds.torque;
+        if (speedFactor < 0.3f && ds.rb.gameObject.transform.forward.y > 1.0f) {
+            ds.torque *= 3.0f;
+            accel = 1;
+            brake = 0;
+        }
+
+
         ds.Go(accel,steer,brake);
 
         Debug.Log("RigidBody Velocity : "+ ds.rb.velocity.magnitude);
         ds.CheckForSkid();
         ds.CalculateEngineSound();
+        ds.torque = prevTorque;
     }
 }

@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     Vector3 lastPosition;
     Quaternion lastRotation;
     CheckPointManager cpManager;
-
+    float finishSteer;
     void ResetLayer()
     {
         ds.rb.gameObject.layer = 0;
@@ -22,10 +22,20 @@ public class PlayerController : MonoBehaviour
         this.GetComponent<Ghost>().enabled = false;
         lastPosition = ds.rb.gameObject.transform.position;
         lastRotation = ds.rb.gameObject.transform.rotation;
+        finishSteer = Random.Range(-1.0f, 1.0f);
     }
 
     void Update()
     {
+        if (cpManager == null)
+            cpManager = ds.rb.GetComponent<CheckPointManager>();
+
+        if (cpManager.lap == RaceMonitor.totalLaps + 1) {
+            ds.highAccel.Stop();
+            ds.Go(0,finishSteer,0);
+            return;
+        }
+
         Debug.Log("OFF ROAD TIMEOUT TIME "+ Time.time +"    "+ lastTimeMoving);
         float a = Input.GetAxis("Vertical");
         float s = Input.GetAxis("Horizontal");
@@ -44,10 +54,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Time.time > lastTimeMoving + 4) {
+        if (Time.time > lastTimeMoving + 4 || ds.rb.gameObject.transform.position.y < -5 ) {
 
-            if (cpManager == null)
-                cpManager = ds.rb.GetComponent<CheckPointManager>();
+            
             Debug.Log("OFF ROAD TIMEOUT");
             ds.rb.gameObject.transform.position = cpManager.LastCP.transform.position + Vector3.up *2;
             ds.rb.gameObject.transform.rotation = cpManager.LastCP.transform.rotation;
