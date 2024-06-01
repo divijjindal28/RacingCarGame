@@ -26,6 +26,11 @@ public class Leaderboard
         return carsRegistered;
     }
 
+    public static void Reset() {
+        lb.Clear();
+        carsRegistered = -1;
+    }
+
     public static void SetPosition(int rego, int lap, int checkpoint ,float time) {
         int position = lap * 1000 + checkpoint;
         lb[rego] = new PlayerStats(lb[rego].name, position, time);

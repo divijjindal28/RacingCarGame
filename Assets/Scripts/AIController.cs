@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AIController : MonoBehaviour
 {
+
     public Circuit circuit;
     Drive ds;
     public float steeringSenstivity = 0.01f;
@@ -25,6 +26,9 @@ public class AIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (circuit == null) {
+            circuit = GameObject.FindGameObjectWithTag("Circuit").GetComponent<Circuit>();
+        }
         ds = this.GetComponent<Drive>();
         target = circuit.waypoints[currentTrackerWP].transform.position;
         totalDistanceToTarget = Vector3.Distance(target, ds.rb.gameObject.transform.position);

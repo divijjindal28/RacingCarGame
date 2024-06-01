@@ -11,7 +11,10 @@ public class DisplayLeaderBoard : MonoBehaviour
     public TextMeshProUGUI third;
     public TextMeshProUGUI fourth;
 
-    
+    private void Start()
+    {
+        Leaderboard.Reset();
+    }
     void LateUpdate()
     {
         List<string> places = Leaderboard.GetPlaces();
