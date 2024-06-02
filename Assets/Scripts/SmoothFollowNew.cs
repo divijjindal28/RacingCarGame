@@ -11,7 +11,7 @@ public class SmoothFollowNew : MonoBehaviour
     public float height = 1.5f;
     public float heightOffset = 1.0f;
     public float heightDamping = 4.0f;
-    public float rotationDamping = 2.0f;
+    public float rotationDamping = 0f;
     public RawImage rearCamView;
     int index = 0;
 
@@ -41,10 +41,10 @@ public class SmoothFollowNew : MonoBehaviour
             return;
         }
 
-        if (FP == 1)
+        if (FP == -1)
         {
             transform.position = target[index].position + target[index].forward * 0.4f + target[index].up;
-            transform.LookAt(target[index].position + target[index].forward * 3f);
+            transform.LookAt(target[index].position + target[index].forward * 1f);
         }
         else
         {
