@@ -37,8 +37,10 @@ public class PlayerController : MonoBehaviour
         }
 
         Debug.Log("OFF ROAD TIMEOUT TIME "+ Time.time +"    "+ lastTimeMoving);
-        float a = Input.GetAxis("Vertical");
-        float s = Input.GetAxis("Horizontal");
+        float a  = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick)[1];
+        float s = OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick)[0];
+        //float a = Input.GetAxis("Vertical");
+        //float s = Input.GetAxis("Horizontal");
         float b = Input.GetAxis("Jump");
 
         if (ds.rb.velocity.magnitude > 1 || !RaceMonitor.racing)

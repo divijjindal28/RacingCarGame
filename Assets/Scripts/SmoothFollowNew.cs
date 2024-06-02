@@ -66,7 +66,7 @@ public class SmoothFollowNew : MonoBehaviour
                                     currentHeight + heightOffset,
                                     transform.position.z);
 
-            transform.LookAt(target[index]);
+            //transform.LookAt(target[index]);
         }
     }
 

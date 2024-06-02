@@ -5,10 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainMenu.unity
     guid: a1ef38fcec9c64f4fbfa3e6d53696af0
   - enabled: 1
     path: Assets/Scenes/CartRacing.unity
     guid: c101d8f7084b445e1a2314a049af32b7
-  m_configObjects: {}
+  m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: d4bb694a46dc8480abb498ff75405034, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 90598d8a7d71b458a92f51bfd385bf5d, type: 2}
