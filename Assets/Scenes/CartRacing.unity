@@ -9129,10 +9129,10 @@ MonoBehaviour:
   - {fileID: 529877892}
   - {fileID: 1093217724}
   carPrefabs:
-  - {fileID: 2467052709491364477, guid: c1a37216c319c4d7ca6ed7088d7dd9f8, type: 3}
-  - {fileID: 4218765197122968763, guid: f74ebe0d47bcb416ca075b247a68a3b5, type: 3}
   - {fileID: 5362390575315067652, guid: 974348906b78448a6848dd649c612569, type: 3}
+  - {fileID: 2467052709491364477, guid: c1a37216c319c4d7ca6ed7088d7dd9f8, type: 3}
   - {fileID: 6569480024153721923, guid: 57537762e9d2147aabd09b50adbe1ffc, type: 3}
+  - {fileID: 4218765197122968763, guid: f74ebe0d47bcb416ca075b247a68a3b5, type: 3}
   spawnPos:
   - {fileID: 359484126}
   - {fileID: 1641625299}

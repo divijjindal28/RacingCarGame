@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/MainMenu.unity
+    path: Assets/Scenes/MainMenu.unity
     guid: a1ef38fcec9c64f4fbfa3e6d53696af0
   - enabled: 1
     path: Assets/Scenes/CartRacing.unity

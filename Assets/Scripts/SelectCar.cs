@@ -9,6 +9,8 @@ public class SelectCar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (PlayerPrefs.HasKey("PlayerCar"))
+            currentCar = PlayerPrefs.GetInt("PlayerCar");
         this.transform.LookAt(cars[currentCar].transform.position);
     }
 
@@ -19,9 +21,11 @@ public class SelectCar : MonoBehaviour
             currentCar++;
             if (currentCar > cars.Length - 1) {
                 currentCar = 0;
+            
             }
+            PlayerPrefs.SetInt("PlayerCar", currentCar);
         }
         Quaternion lookDr = Quaternion.LookRotation(cars[currentCar].transform.position - this.transform.position);
-        this.transform.rotation = Quaternion.Slerp(transform.rotation, lookDr, Time.time);
+        this.transform.rotation = Quaternion.Slerp(transform.rotation, lookDr, Time.deltaTime);
     }
 }

@@ -75,7 +75,7 @@ public class Drive : MonoBehaviour
 
         }
         else {
-            playerNameObj.GetComponent<TextMeshProUGUI>().text = "Human";
+            playerNameObj.GetComponent<TextMeshProUGUI>().text = PlayerPrefs.GetString("PlayerName");
         }
         playerNameObj.GetComponent<NameUIController1>().carRend = jeepMesh;
     }

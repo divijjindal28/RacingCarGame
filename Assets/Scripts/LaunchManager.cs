@@ -14,6 +14,8 @@ public class LaunchManager : MonoBehaviour
     {
         if (PlayerPrefs.HasKey("PlayerName"))
             playerName.text = PlayerPrefs.GetString("PlayerName");
+
+
     }
 
     public void SetName(string name) {

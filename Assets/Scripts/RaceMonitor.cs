@@ -13,6 +13,8 @@ public class RaceMonitor : MonoBehaviour
     public Transform[] spawnPos;
     public GameObject gameOverPannel;
     public GameObject HUD;
+
+    int playerCar;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +23,18 @@ public class RaceMonitor : MonoBehaviour
         StartCoroutine(PlayCountDown());
         gameOverPannel.SetActive(false);
 
+        playerCar = PlayerPrefs.GetInt("PlayerCar");
+        GameObject pcar = Instantiate(carPrefabs[playerCar]);
+        int randomSTartPos = Random.Range(0, spawnPos.Length);
+        pcar.transform.position = spawnPos[randomSTartPos].position;
+        pcar.transform.rotation = spawnPos[randomSTartPos].rotation;
+        SmoothFollowNew.PlayerCar = pcar.gameObject.GetComponent<Drive>().rb.transform;
+        pcar.GetComponent<AIController>().enabled = false;
+        pcar.GetComponent<PlayerController>().enabled = true;
+
+
         foreach (Transform t in spawnPos) {
+            if (t == spawnPos[randomSTartPos]) continue;
             GameObject car = Instantiate(carPrefabs[Random.Range(0, carPrefabs.Length)]);
             car.transform.position = t.position;
             car.transform.rotation = t.rotation;
