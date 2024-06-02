@@ -23,6 +23,8 @@ public class LaunchManager : MonoBehaviour
     }
 
     public void ConnectSingle() {
+        PlayerPrefs.SetString("PlayerName", "Human");
+
         SceneManager.LoadScene("CartRacing");
     }
 }
