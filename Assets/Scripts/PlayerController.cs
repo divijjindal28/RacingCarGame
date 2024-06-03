@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     Quaternion lastRotation;
     CheckPointManager cpManager;
     float finishSteer;
+    float leftControllerPressCount = 0;
     void ResetLayer()
     {
         ds.rb.gameObject.layer = 0;
@@ -39,9 +40,21 @@ public class PlayerController : MonoBehaviour
         Debug.Log("OFF ROAD TIMEOUT TIME "+ Time.time +"    "+ lastTimeMoving);
         float a  = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick)[1];
         float s = OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick)[0];
+        if (OVRInput.Get(OVRInput.Button.One))
+        {
+            if (leftControllerPressCount < 1)
+                leftControllerPressCount += 1f * Time.deltaTime;
+        }
+        else
+        {
+            if (leftControllerPressCount > 0.1f)
+                leftControllerPressCount -= 1f * Time.deltaTime;
+            else
+                leftControllerPressCount = 0;
+        }
         //float a = Input.GetAxis("Vertical");
         //float s = Input.GetAxis("Horizontal");
-        float b = Input.GetAxis("Jump");
+        float b = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger);
 
         if (ds.rb.velocity.magnitude > 1 || !RaceMonitor.racing)
             lastTimeMoving = Time.time;

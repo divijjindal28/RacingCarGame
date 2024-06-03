@@ -12,21 +12,22 @@ public class HUDController : MonoBehaviour
     void Start()
     {
         canvasGroup = this.GetComponent<CanvasGroup>();
-        canvasGroup.alpha = 0;
-        if (PlayerPrefs.HasKey("HUD"))
-            HUDSetting = PlayerPrefs.GetFloat("HUD");
+        canvasGroup.alpha = 1;//should be 0
+        //if (PlayerPrefs.HasKey("HUD"))
+        //    HUDSetting = PlayerPrefs.GetFloat("HUD");
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (RaceMonitor.racing)
-            canvasGroup.alpha = HUDSetting;
-        if (Input.GetKeyDown(KeyCode.H)) {
-            canvasGroup.alpha = canvasGroup.alpha == 1 ? 0 : 1;
-            HUDSetting = canvasGroup.alpha;
-            PlayerPrefs.SetFloat("HUD", canvasGroup.alpha);
-        }
+
+        //if (RaceMonitor.racing)
+        //    canvasGroup.alpha = HUDSetting;
+        //if (Input.GetKeyDown(KeyCode.H)) {
+        //    canvasGroup.alpha = canvasGroup.alpha == 1 ? 0 : 1;
+        //    HUDSetting = canvasGroup.alpha;
+        //    PlayerPrefs.SetFloat("HUD", canvasGroup.alpha);
+        //}
     }
 }
