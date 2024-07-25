@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     Quaternion lastRotation;
     CheckPointManager cpManager;
     float finishSteer;
+    public GameObject obj;
     void ResetLayer()
     {
         ds.rb.gameObject.layer = 0;
